@@ -1,1136 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AL-HUDĀ HOLY QUR'AN AWARD ‘26</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js">
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;600;700;800&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎡 College Spin · Wheel of 6</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1b2f44 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      padding: 1.5rem;
+      margin: 0;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #080b17;
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    .card {
+      max-width: 780px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 4rem 4rem 3rem 3rem;
+      padding: 2rem 1.8rem 2.5rem;
+      box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: 0.25s;
+    }
 
-        .bg-radial {
-            background: radial-gradient(ellipse at 50% 0%, #121c3a 0%, #080b17 75%);
-            min-height: 100vh;
-        }
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      font-size: 2.1rem;
+      letter-spacing: 1px;
+      color: #f2e9d0;
+      text-shadow: 0 4px 10px #00000055, 0 0 0 2px #3b5a78;
+      margin-top: -0.2rem;
+      margin-bottom: 1.5rem;
+      word-break: break-word;
+    }
+    h1 small {
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0.8;
+      display: inline-block;
+      margin-left: 0.5rem;
+      background: #1f3d57;
+      padding: 0.1rem 1rem;
+      border-radius: 40px;
+      color: #d6e5f0;
+      text-shadow: none;
+    }
 
-        /* ===== MAIN TITLE ===== */
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2rem, 6vw, 4.6rem);
-            letter-spacing: 0.06em;
-            background: linear-gradient(135deg, #f7e05e, #f9b042, #f7e05e);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 5s ease-in-out infinite;
-            text-shadow: 0 0 80px rgba(247, 224, 94, 0.10);
-        }
-        @keyframes shimmer {
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
+    .wheel-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      aspect-ratio: 1/1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .sub-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            color: #8ab4f8;
-            font-size: clamp(0.75rem, 1.8vw, 1.1rem);
-            text-transform: uppercase;
-        }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 50%;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 4px #3a5f7a, 0 0 0 8px #1f3346;
+      transition: box-shadow 0.2s;
+      background: #182b3b;
+      cursor: pointer;
+      touch-action: none;
+    }
 
-        .venue-tag {
-            background: rgba(138, 180, 248, 0.07);
-            border: 1px solid rgba(138, 180, 248, 0.10);
-            padding: 0.3rem 1.4rem;
-            border-radius: 40px;
-            font-size: clamp(0.65rem, 1vw, 0.8rem);
-            color: #8ab4f8;
-            letter-spacing: 0.08em;
-            backdrop-filter: blur(4px);
-        }
+    canvas:active {
+      box-shadow: 0 8px 25px #000000cc, 0 0 0 4px #5f8aa8, 0 0 0 8px #26415a;
+    }
 
-        /* ===== WHEEL ===== */
-        .wheel-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 460px;
-            margin: 0 auto;
-        }
+    .pointer {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-top: 40px solid #f8d36b;
+      filter: drop-shadow(0 8px 8px #00000077);
+      z-index: 10;
+      transition: 0.15s;
+    }
+    .pointer::after {
+      content: '';
+      position: absolute;
+      top: -46px;
+      left: -12px;
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, #fce38a, #dba42b);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #1f2e3d;
+    }
 
-        .wheel-pointer-outer {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .wheel-pointer {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(180deg, #f7e05e, #e8942a);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            filter: drop-shadow(0 4px 20px rgba(247, 224, 94, 0.5));
-        }
-        .wheel-pointer-dot {
-            width: 18px;
-            height: 18px;
-            background: radial-gradient(circle, #fff, #d4d4d4);
-            border-radius: 50%;
-            margin-top: -6px;
-            box-shadow: 0 0 30px rgba(247, 224, 94, 0.4);
-            border: 2px solid rgba(247, 224, 94, 0.2);
-        }
+    .result-area {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      background: #0e1e2dcc;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      border: 1px solid #3e607b;
+      box-shadow: inset 0 2px 5px #00000055, 0 6px 12px #00000044;
+    }
 
-        .wheel-base {
-            border-radius: 50%;
-            box-shadow:
-                0 0 50px rgba(138, 180, 248, 0.08),
-                inset 0 0 80px rgba(8, 11, 23, 0.6);
-            transition: transform 5.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            aspect-ratio: 1/1;
-            border: 2px solid rgba(247, 224, 94, 0.06);
-        }
+    .result-label {
+      color: #b4cfE6;
+      font-weight: 400;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
 
-        .wheel-glow-ring {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid rgba(247, 224, 94, 0.04);
-            pointer-events: none;
-            z-index: 4;
-            animation: ringPulse 4s ease-in-out infinite;
-        }
-        @keyframes ringPulse {
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.02);
-            }
-        }
+    #selectedCollege {
+      background: #f5efe0;
+      padding: 0.4rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #0d2538;
+      box-shadow: inset 0 -2px 0 #afc9dd, 0 4px 12px #00000055;
+      min-width: 140px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+      border: 2px solid #d7b15d;
+    }
 
-        /* ===== BUTTONS ===== */
-        .btn-spin {
-            background: linear-gradient(135deg, #f7e05e, #f9b042);
-            color: #0b0e1a;
-            font-weight: 800;
-            padding: 0.85rem 3rem;
-            border-radius: 60px;
-            border: none;
-            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-            letter-spacing: 0.06em;
-            box-shadow: 0 6px 35px rgba(247, 224, 94, 0.20);
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-spin::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-            pointer-events: none;
-            border-radius: 60px;
-        }
-        .btn-spin:hover:not(:disabled) {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 50px rgba(247, 224, 94, 0.35);
-        }
-        .btn-spin:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none;
-        }
+    .btn-spin {
+      background: #dfc27d;
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #142734;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 0 #8f6f38, 0 10px 20px #00000055;
+      transition: 0.07s linear;
+      cursor: pointer;
+      border: 1px solid #f8e3a5;
+      letter-spacing: 1px;
+      margin-top: 0.4rem;
+    }
 
-        .btn-reset {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: #b0c8e8;
-            font-weight: 600;
-            padding: 0.85rem 2.4rem;
-            border-radius: 60px;
-            font-size: clamp(0.8rem, 1.1vw, 0.95rem);
-            letter-spacing: 0.04em;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            backdrop-filter: blur(4px);
-        }
-        .btn-reset:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
+    .btn-spin:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #6d4f28, 0 6px 14px #00000066;
+    }
 
-        .remaining-badge {
-            background: rgba(138, 180, 248, 0.05);
-            border: 1px solid rgba(138, 180, 248, 0.06);
-            padding: 0.4rem 2rem;
-            border-radius: 40px;
-            font-size: clamp(0.75rem, 1vw, 0.9rem);
-            color: #b0c8e8;
-            font-weight: 400;
-            letter-spacing: 0.03em;
-            backdrop-filter: blur(4px);
-        }
-        .remaining-badge strong {
-            color: #f7e05e;
-            font-weight: 700;
-        }
+    .btn-spin:disabled {
+      opacity: 0.5;
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 #6d4f28;
+      pointer-events: none;
+    }
 
-        /* ===== HISTORY PANEL ===== */
-        .history-panel {
-            background: rgba(255, 255, 255, 0.015);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 1.6rem 1.8rem;
-            height: 100%;
-            min-height: 300px;
-            transition: all 0.3s ease;
-        }
-        .history-panel:hover {
-            border-color: rgba(255, 255, 255, 0.05);
-        }
+    .spin-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
 
-        .history-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 1.3vw, 1.15rem);
-            color: #e8f0ff;
-            letter-spacing: 0.04em;
-        }
-        .history-title span {
-            background: rgba(247, 224, 94, 0.08);
-            padding: 0.05rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            color: #f7e05e;
-            font-weight: 700;
-            margin-left: 0.5rem;
-        }
+    .footer-note {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.8rem;
+      color: #7b99b3;
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      opacity: 0.7;
+    }
 
-        .history-list {
-            max-height: 280px;
-            overflow-y: auto;
-            padding-right: 0.25rem;
-            margin-top: 0.5rem;
-        }
-        .history-list::-webkit-scrollbar {
-            width: 3px;
-        }
-        .history-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: 10px;
-        }
-        .history-list::-webkit-scrollbar-thumb {
-            background: rgba(247, 224, 94, 0.15);
-            border-radius: 10px;
-        }
-
-        .history-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 0.7rem 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            margin-bottom: 0.5rem;
-        }
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.035);
-            border-color: rgba(247, 224, 94, 0.06);
-        }
-        .history-item .h-name {
-            font-weight: 700;
-            font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-            color: #e8f0ff;
-            letter-spacing: 0.02em;
-        }
-        .history-item .h-college {
-            font-size: clamp(0.55rem, 0.7vw, 0.65rem);
-            color: #8ab4f8;
-            letter-spacing: 0.04em;
-            background: rgba(138, 180, 248, 0.05);
-            padding: 0.1rem 0.8rem;
-            border-radius: 30px;
-            font-weight: 500;
-        }
-        .history-item .h-number {
-            font-weight: 700;
-            font-size: 0.7rem;
-            color: #f7e05e;
-            background: rgba(247, 224, 94, 0.06);
-            width: 26px;
-            height: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .history-empty {
-            color: #3a4a6a;
-            font-size: 0.85rem;
-            text-align: center;
-            padding: 2.5rem 0;
-            letter-spacing: 0.04em;
-        }
-
-        /* ===== SELECTION OVERLAY ===== */
-        .selection-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(8, 11, 23, 0.92);
-            backdrop-filter: blur(24px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
-        }
-        .selection-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .selection-overlay .close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2.5rem;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: #8a9bb8;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .selection-overlay .close-btn:hover {
-            background: rgba(255, 255, 255, 0.07);
-            color: #fff;
-            transform: rotate(90deg);
-        }
-
-        .selection-card {
-            text-align: center;
-            padding: 2.5rem 3.5rem;
-            max-width: 780px;
-            width: 90%;
-            animation: selectionPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            transform: scale(0.8) translateY(30px);
-            opacity: 0;
-        }
-        .selection-card.active {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        @keyframes selectionPop {
-            0% {
-                transform: scale(0.8) translateY(30px);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .selection-card .badge-icon {
-            display: inline-block;
-            background: linear-gradient(135deg, #f7e05e, #f9b042);
-            color: #0b0e1a;
-            font-weight: 800;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            padding: 0.25rem 1.4rem;
-            border-radius: 40px;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-        }
-        .selection-card .selected-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2.8rem, 10vw, 5.5rem);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 0.3rem;
-            text-shadow: 0 4px 60px rgba(247, 224, 94, 0.06);
-        }
-        .selection-card .selected-college {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #f7e05e;
-            background: rgba(247, 224, 94, 0.05);
-            display: inline-block;
-            padding: 0.25rem 2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(247, 224, 94, 0.06);
-            margin-top: 0.2rem;
-        }
-        .selection-card .student-tag {
-            display: inline-block;
-            background: rgba(138, 180, 248, 0.06);
-            border: 1px solid rgba(138, 180, 248, 0.08);
-            padding: 0.2rem 1.6rem;
-            border-radius: 40px;
-            font-size: clamp(0.7rem, 1vw, 0.85rem);
-            color: #8ab4f8;
-            letter-spacing: 0.06em;
-            margin-top: 0.8rem;
-        }
-        .selection-card .selected-id {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: clamp(0.7rem, 1vw, 0.9rem);
-            color: #6a7a9a;
-            margin-top: 0.6rem;
-            letter-spacing: 0.1em;
-        }
-        .selection-card .divider-line {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(247, 224, 94, 0.15), transparent);
-            margin: 1rem auto 0;
-        }
-
-        @media (max-width: 640px) {
-            .selection-overlay .close-btn {
-                top: 1.2rem;
-                right: 1.2rem;
-                width: 44px;
-                height: 44px;
-                font-size: 1rem;
-            }
-            .selection-card {
-                padding: 1.5rem;
-            }
-        }
-
-        /* ===== PARTICLES ===== */
-        .particle-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .particle-bg span {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(247, 224, 94, 0.10);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* ===== WHEEL TEXT ===== */
-        .wheel-text {
-            font-size: 8px !important;
-            letter-spacing: 0.04em;
-            font-weight: 700;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-        }
-
-        .glow-pulse {
-            animation: wheelGlow 3s ease-in-out infinite;
-        }
-        @keyframes wheelGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 40px rgba(138, 180, 248, 0.04), inset 0 0 60px rgba(8, 11, 23, 0.6);
-            }
-            50% {
-                box-shadow: 0 0 70px rgba(247, 224, 94, 0.04), inset 0 0 60px rgba(8, 11, 23, 0.6);
-            }
-        }
-
-        .spin-pulse {
-            animation: btnPulse 2s ease-in-out infinite;
-        }
-        @keyframes btnPulse {
-            0%,
-            100% {
-                box-shadow: 0 6px 35px rgba(247, 224, 94, 0.15);
-            }
-            50% {
-                box-shadow: 0 6px 55px rgba(247, 224, 94, 0.30);
-            }
-        }
-
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.2;
-            }
-        }
-    </style>
+    @media (max-width: 550px) {
+      .card { padding: 1.2rem 1rem 1.8rem; }
+      h1 { font-size: 1.6rem; }
+      .result-area { flex-direction: column; gap: 0.5rem; padding: 1rem 1.2rem; }
+      #selectedCollege { font-size: 1.4rem; min-width: 120px; }
+      .btn-spin { font-size: 1.1rem; padding: 0.6rem 1.5rem; }
+      .pointer { top: -12px; border-left-width: 16px; border-right-width: 16px; border-top-width: 28px; }
+      .pointer::after { top: -34px; left: -8px; width: 16px; height: 16px; }
+    }
+  </style>
 </head>
 <body>
+<div class="card">
+  <h1>🎓 SPIN<span style="font-weight:300; margin-left:6px;">&</span> PICK <small>6 colleges</small></h1>
 
-    <!-- ===== PARTICLES ===== -->
-    <div class="particle-bg" id="particleBg"></div>
+  <div class="wheel-wrapper">
+    <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    <div class="pointer" aria-hidden="true"></div>
+  </div>
 
-    <!-- ===== SELECTION OVERLAY ===== -->
-    <div class="selection-overlay" id="selectionOverlay">
-        <button class="close-btn" id="closeSelectionBtn" aria-label="Close">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="selection-card" id="selectionCard">
-            <div class="badge-icon"><i class="fas fa-trophy mr-2"></i> winner</div>
-            <div class="selected-name" id="selectedNameDisplay">—</div>
-            <div class="selected-college" id="selectedCollegeDisplay">—</div>
-            <div class="student-tag" id="selectedStudentDisplay"><i class="fas fa-user-graduate mr-2"></i> —</div>
-            <div class="selected-id" id="selectedIdDisplay"># —</div>
-            <div class="divider-line"></div>
-        </div>
-    </div>
+  <div class="result-area">
+    <span class="result-label">🏆 selected</span>
+    <span id="selectedCollege">—</span>
+    <button class="btn-spin" id="spinBtn"><span class="spin-icon">⟳</span> SPIN</button>
+  </div>
+  <div class="footer-note">⬆ click wheel or press SPIN</div>
+</div>
 
-    <!-- ===== MAIN ===== -->
-    <div class="bg-radial relative z-10 p-4 md:p-6">
+<script>
+  (function() {
+    // ----- COLLEGES (6 slices) -----
+    const COLLEGES = [
+      "DUIDC THOOTHA",
+      "BUAC MANIYOOR",
+      "DH CHEMMAD",
+      "SHIC PARAPPUR",
+      "DNIC VALLAPPUZHA",
+      "DNAC KOONANCHERY"
+    ];
 
-        <div class="max-w-6xl mx-auto">
+    // ----- canvas setup -----
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const spinBtn = document.getElementById('spinBtn');
+    const selectedSpan = document.getElementById('selectedCollege');
 
-            <!-- HEADER -->
-            <header class="text-center py-4 md:py-6">
-                <h1 class="main-title">AL-HUDĀ</h1>
-                <p class="sub-title mt-1">Holy Qur'an Award <span class="text-white font-light mx-1">•</span> ‘26</p>
-                <div class="flex flex-wrap items-center justify-center gap-3 mt-3">
-                    <span class="venue-tag"><i class="fas fa-map-pin mr-2"></i> VENUE: THOOTHA</span>
-                    <span class="venue-tag"><i class="fas fa-university mr-2"></i> 6 Colleges</span>
-                    <span class="venue-tag"><i class="fas fa-users mr-2"></i> 18 Participants</span>
-                </div>
-            </header>
+    // ----- wheel state -----
+    let currentAngle = 0;          // rotation in radians
+    let isSpinning = false;
+    let animationId = null;
+    let spinVelocity = 0;
+    const friction = 0.985;        // deceleration per frame
+    const minSpin = 0.012;         // stop when velocity below this
 
-            <!-- GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-4">
+    // slice angle (6 slices)
+    const sliceAngle = (2 * Math.PI) / COLLEGES.length;
 
-                <!-- LEFT: WHEEL -->
-                <div class="flex flex-col items-center">
+    // ----- helper: draw the wheel -----
+    function drawWheel(rotation) {
+      const w = canvas.width;
+      const h = canvas.height;
+      const radius = Math.min(w, h) * 0.44;  // leave room for pointer
+      const cx = w / 2;
+      const cy = h / 2;
 
-                    <div class="wheel-wrapper">
-                        <!-- pointer -->
-                        <div class="wheel-pointer-outer">
-                            <div class="wheel-pointer"></div>
-                            <div class="wheel-pointer-dot"></div>
-                        </div>
+      ctx.clearRect(0, 0, w, h);
 
-                        <div class="wheel-base glow-pulse" id="wheelBase">
-                            <canvas id="wheelCanvas" width="460" height="460" style="width:100%;height:100%;display:block;"></canvas>
-                            <div class="wheel-glow-ring"></div>
-                        </div>
-                    </div>
+      // vibrant colors for 6 slices
+      const colors = [
+        '#E6514A', // red
+        '#F9A825', // amber
+        '#43A047', // green
+        '#1E88E5', // blue
+        '#8E24AA', // purple
+        '#FB8C00'  // orange
+      ];
 
-                    <!-- Buttons -->
-                    <div class="flex flex-wrap items-center justify-center gap-4 mt-7">
-                        <button class="btn-spin spin-pulse" id="spinBtn">
-                            <i class="fas fa-sync-alt mr-2"></i> Spin
-                        </button>
-                        <button class="btn-reset" id="resetBtn">
-                            <i class="fas fa-redo-alt mr-2"></i> Reset
-                        </button>
-                    </div>
+      // draw each slice
+      for (let i = 0; i < COLLEGES.length; i++) {
+        const start = i * sliceAngle + rotation;
+        const end = start + sliceAngle;
 
-                    <!-- Remaining -->
-                    <div class="remaining-badge mt-5" id="remainingBadge">
-                        <i class="fas fa-university mr-2"></i>
-                        <strong id="remainingCount">6</strong> colleges remaining
-                    </div>
-                </div>
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, start, end);
+        ctx.closePath();
 
-                <!-- RIGHT: HISTORY -->
-                <div class="history-panel">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="history-title">
-                            <i class="fas fa-clock-rotate-left mr-2 text-blue-300"></i>
-                            Selection History
-                            <span id="historyCountBadge">0</span>
-                        </div>
-                    </div>
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        ctx.strokeStyle = '#f5f1e0';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
 
-                    <div class="history-list" id="historyList">
-                        <div class="history-empty" id="historyEmpty">
-                            <i class="fas fa-inbox text-2xl block mb-2 opacity-20"></i>
-                            No selections yet
-                        </div>
-                    </div>
-                </div>
+        // label
+        const midAngle = start + sliceAngle / 2;
+        const labelRadius = radius * 0.68;
+        const x = cx + Math.cos(midAngle) * labelRadius;
+        const y = cy + Math.sin(midAngle) * labelRadius;
 
-            </div>
-        </div>
-    </div>
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(midAngle + (midAngle > Math.PI/2 ? Math.PI : 0));
+        ctx.font = 'bold 18px "Segoe UI", system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#00000088';
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#000000bb';
+        ctx.shadowBlur = 12;
 
-    <script>
-        // ================================================================
-        //  DATA – 6 Colleges × 3 Students = 18
-        // ================================================================
-        const COLLEGE_DATA = [{
-            id: 1,
-            name: "DUIDC THOOTHA",
-            students: ["MUHAMMED AFNAN", "ZAYD ALI", "HASHIR RAHMAN"],
-            color: "#f7e05e"
-        }, {
-            id: 2,
-            name: "BUAC MANIYOOR",
-            students: ["FAISAL K", "ABDUL RAHMAN", "HUSSAIN M"],
-            color: "#4facfe"
-        }, {
-            id: 3,
-            name: "DH CHEMMAD",
-            students: ["MUHAMMED NABEEH KT", "MUHAMMED LABEEB CK", "SALMAN AHMAD VH"],
-            color: "#a770ef"
-        }, {
-            id: 4,
-            name: "SHIC PARAPPUR",
-            students: ["MUHAMMED ZUHAIR AK", "MUHAMMED NAWAF M", "MUHAMMED YASEEN KT"],
-            color: "#00cdac"
-        }, {
-            id: 5,
-            name: "DNIC VALLAPPUZHA",
-            students: ["MUHAMMED AFSAL", "MUHAMMED ARIF", "MUHAMMED MISHAB"],
-            color: "#ff758c"
-        }, {
-            id: 6,
-            name: "DNAC KOONANCHERY",
-            students: ["KHALEEL AL RAHMAN", "MUHAMMED HASHIM", "MUHAMMED AMEEN PM"],
-            color: "#f9b042"
-        }];
-
-        // ================================================================
-        //  STATE
-        // ================================================================
-        let available = COLLEGE_DATA.map(c => ({ ...c }));
-        let selected = [];
-        let isSpinning = false;
-        let spinAngle = 0;
-        let currentSelectionId = null;
-
-        const SLICE_COLORS = [
-            { main: "#f7e05e", alt: "#f9b042" },
-            { main: "#4facfe", alt: "#00d4ff" },
-            { main: "#a770ef", alt: "#cf8bf3" },
-            { main: "#00cdac", alt: "#02aab0" },
-            { main: "#ff758c", alt: "#ff7eb3" },
-            { main: "#f9b042", alt: "#f7e05e" }
-        ];
-
-        // ================================================================
-        //  CANVAS SETUP
-        // ================================================================
-        const canvas = document.getElementById('wheelCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function getCanvasSize() {
-            const rect = canvas.getBoundingClientRect();
-            const size = rect.width || 460;
-            return { w: size, h: size };
+        // split long names into two lines if needed (optional)
+        const name = COLLEGES[i];
+        let displayName = name;
+        // if name has space, break into two lines for better fit
+        if (name.includes(' ')) {
+          const parts = name.split(' ');
+          if (parts.length === 2) {
+            // show as two lines
+            ctx.font = 'bold 15px "Segoe UI", system-ui, sans-serif';
+            ctx.fillText(parts[0], 0, -10);
+            ctx.fillText(parts[1], 0, 14);
+          } else {
+            ctx.fillText(name, 0, 0);
+          }
+        } else {
+          ctx.fillText(name, 0, 0);
         }
+        ctx.restore();
+      }
 
-        function drawWheel() {
-            const { w, h } = getCanvasSize();
-            canvas.width = w;
-            canvas.height = h;
-            const cx = w / 2,
-                cy = h / 2,
-                radius = w / 2 - 3;
+      // center dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 0.08, 0, 2 * Math.PI);
+      ctx.fillStyle = '#f7f3e3';
+      ctx.shadowColor = '#000000aa';
+      ctx.shadowBlur = 14;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = '#1f2e3d';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
 
-            ctx.clearRect(0, 0, w, h);
+    // ----- get college under pointer (top = -90° offset) -----
+    function getCollegeFromAngle(rotation) {
+      // pointer is at top: -PI/2 (12 o'clock)
+      const pointerAngle = -Math.PI / 2; 
+      // angle from center to pointer (in wheel space)
+      let raw = (pointerAngle - rotation) % (2 * Math.PI);
+      if (raw < 0) raw += 2 * Math.PI;
+      const index = Math.floor(raw / sliceAngle);
+      // clamp (just in case)
+      return COLLEGES[Math.min(index, COLLEGES.length - 1)];
+    }
 
-            // ----- NO COLLEGES LEFT -----
-            if (available.length === 0) {
-                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-                grad.addColorStop(0, 'rgba(247,224,94,0.05)');
-                grad.addColorStop(1, 'rgba(8,11,23,0.6)');
-                ctx.beginPath();
-                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-                ctx.fillStyle = grad;
-                ctx.fill();
+    // ----- update result display -----
+    function updateResult(rotation) {
+      const college = getCollegeFromAngle(rotation);
+      selectedSpan.textContent = college;
+    }
 
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = '#f7e05e';
-                ctx.font = `bold ${radius * 0.18}px 'Playfair Display', serif`;
-                ctx.fillText('🏆', cx, cy - 14);
-                ctx.fillStyle = '#f7e05e';
-                ctx.font = `bold ${radius * 0.12}px 'Inter', sans-serif`;
-                ctx.fillText('ALL DONE!', cx, cy + 30);
-                ctx.fillStyle = '#4a5a7a';
-                ctx.font = `${radius * 0.07}px 'Inter', sans-serif`;
-                ctx.fillText('Click RESET to start over', cx, cy + 58);
+    // ----- animation loop -----
+    function spinAnimation() {
+      if (!isSpinning) return;
 
-                ctx.beginPath();
-                ctx.arc(cx, cy, radius * 0.75, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(247,224,94,0.05)';
-                ctx.lineWidth = 1.5;
-                ctx.setLineDash([6, 12]);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                return;
-            }
+      // apply friction
+      spinVelocity *= friction;
 
-            const slice = (2 * Math.PI) / available.length;
-            const fontSize = Math.min(radius * 0.038, 10);
-            const textRadius = radius * 0.82;
+      // if nearly stopped, end spin
+      if (Math.abs(spinVelocity) < minSpin) {
+        spinVelocity = 0;
+        isSpinning = false;
+        animationId = null;
+        spinBtn.disabled = false;
+        // final result
+        updateResult(currentAngle);
+        return;
+      }
 
-            // ----- DRAW SLICES -----
-            for (let i = 0; i < available.length; i++) {
-                const start = spinAngle + i * slice;
-                const end = start + slice;
-                const ci = i % SLICE_COLORS.length;
-                const c = SLICE_COLORS[ci];
+      // update angle
+      currentAngle = (currentAngle + spinVelocity) % (2 * Math.PI);
+      drawWheel(currentAngle);
+      // live update selected (optional, but nice)
+      updateResult(currentAngle);
 
-                // slice fill
-                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-                grad.addColorStop(0, c.alt);
-                grad.addColorStop(1, c.main);
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, radius, start, end);
-                ctx.closePath();
-                ctx.fillStyle = grad;
-                ctx.fill();
+      // continue
+      animationId = requestAnimationFrame(spinAnimation);
+    }
 
-                // border
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, radius, start, end);
-                ctx.closePath();
-                ctx.strokeStyle = 'rgba(8,11,23,0.35)';
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+    // ----- start spin with random velocity -----
+    function startSpin() {
+      if (isSpinning) {
+        // if already spinning, do nothing (or stop / re-trigger? we choose to ignore)
+        return;
+      }
 
-                // divider line
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.lineTo(cx + Math.cos(start) * radius, cy + Math.sin(start) * radius);
-                ctx.strokeStyle = 'rgba(8,11,23,0.25)';
-                ctx.lineWidth = 1.2;
-                ctx.stroke();
+      // random velocity: between 0.45 and 1.0 rad/frame (plus some randomness)
+      const baseSpeed = 0.45 + Math.random() * 0.65;
+      // add random direction (clockwise always positive, but can be negative too)
+      const direction = Math.random() > 0.5 ? 1 : -1;
+      spinVelocity = direction * baseSpeed * (0.9 + Math.random() * 0.3);
 
-                // ----- COLLEGE NAME on the slice (near rim) -----
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(start + slice / 2);
-                ctx.translate(textRadius, 0);
+      isSpinning = true;
+      spinBtn.disabled = true;
 
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.shadowColor = 'rgba(0,0,0,0.9)';
-                ctx.shadowBlur = 6;
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = requestAnimationFrame(spinAnimation);
+    }
 
-                const name = available[i].name;
-                let lines = [name];
-                if (name.length > 14) {
-                    const parts = name.split(' ');
-                    if (parts.length > 1) {
-                        const mid = Math.ceil(parts.length / 2);
-                        lines = [parts.slice(0, mid).join(' '), parts.slice(mid).join(' ')];
-                    } else {
-                        lines = [name.substring(0, Math.ceil(name.length / 2)), name.substring(Math.ceil(name.length / 2))];
-                    }
-                }
+    // ----- click on canvas spins -----
+    function handleCanvasClick(e) {
+      e.preventDefault();
+      if (!isSpinning) {
+        startSpin();
+      }
+    }
 
-                const lineHeight = fontSize * 1.3;
-                const totalHeight = lines.length * lineHeight;
-                const startY = -totalHeight / 2 + lineHeight / 2;
+    // ----- reset and draw initial -----
+    function initWheel() {
+      // set a random initial rotation so it looks fresh
+      currentAngle = Math.random() * 2 * Math.PI;
+      drawWheel(currentAngle);
+      updateResult(currentAngle);
+      spinBtn.disabled = false;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+      isSpinning = false;
+      spinVelocity = 0;
+    }
 
-                ctx.font = `bold ${fontSize}px 'Montserrat', sans-serif`;
-                ctx.fillStyle = '#ffffff';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
+    // ----- event binding -----
+    canvas.addEventListener('click', handleCanvasClick);
+    spinBtn.addEventListener('click', startSpin);
 
-                lines.forEach((line, idx) => {
-                    ctx.fillText(line, 0, startY + idx * lineHeight);
-                });
+    // optional: touch support for canvas
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (!isSpinning) startSpin();
+    }, { passive: false });
 
-                ctx.shadowBlur = 0;
-                ctx.restore();
-            }
+    // draw on load
+    initWheel();
 
-            // ----- outer ring -----
-            ctx.beginPath();
-            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+    // also update result on window resize (redraw)
+    window.addEventListener('resize', () => {
+      drawWheel(currentAngle);
+    });
 
-            // ----- inner center ring -----
-            const centerR = radius * 0.13;
-            const grad2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, centerR);
-            grad2.addColorStop(0, 'rgba(8,11,23,0.3)');
-            grad2.addColorStop(1, 'rgba(8,11,23,0.7)');
-            ctx.beginPath();
-            ctx.arc(cx, cy, centerR, 0, Math.PI * 2);
-            ctx.fillStyle = grad2;
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(247,224,94,0.08)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = `${centerR * 0.9}px 'Font Awesome 6 Free'`;
-            ctx.fillStyle = 'rgba(247,224,94,0.15)';
-            ctx.fillText('', cx, cy + 1);
-        }
-
-        // ================================================================
-        //  SPIN
-        // ================================================================
-        function spin() {
-            if (isSpinning || available.length === 0) return;
-
-            isSpinning = true;
-            document.getElementById('spinBtn').disabled = true;
-            closeOverlay();
-
-            const spins = 6 + Math.random() * 6;
-            const idx = Math.floor(Math.random() * available.length);
-            const slice = (2 * Math.PI) / available.length;
-            const target = spinAngle - (2 * Math.PI * spins) - (idx * slice) - (slice / 2);
-
-            playSpinSound();
-
-            const pointer = document.querySelector('.wheel-pointer');
-            pointer.style.animation = 'blink 0.12s infinite';
-
-            gsap.to({ a: spinAngle }, {
-                a: target,
-                duration: 5.5,
-                ease: "power2.inOut",
-                onUpdate: function() {
-                    spinAngle = this.targets()[0].a;
-                    drawWheel();
-                },
-                onComplete: function() {
-                    spinAngle = target % (2 * Math.PI);
-                    if (spinAngle > 0) spinAngle -= 2 * Math.PI;
-
-                    const chosen = available[idx];
-                    const student = chosen.students[Math.floor(Math.random() * chosen.students.length)];
-
-                    available = available.filter(c => c.id !== chosen.id);
-                    selected.push({ ...chosen, selectedStudent: student });
-                    currentSelectionId = chosen.id;
-
-                    showSelection(chosen, student);
-                    updateHistory(chosen, student);
-                    updateRemaining();
-                    playWinSound();
-                    triggerConfetti();
-
-                    setTimeout(() => {
-                        isSpinning = false;
-                        document.getElementById('spinBtn').disabled = available.length === 0;
-                        pointer.style.animation = '';
-                    }, 700);
-
-                    drawWheel();
-                }
-            });
-        }
-
-        // ================================================================
-        //  SHOW FULL-SCREEN SELECTION
-        // ================================================================
-        function showSelection(college, student) {
-            const overlay = document.getElementById('selectionOverlay');
-            const card = document.getElementById('selectionCard');
-            const nameEl = document.getElementById('selectedNameDisplay');
-            const collegeEl = document.getElementById('selectedCollegeDisplay');
-            const studentEl = document.getElementById('selectedStudentDisplay');
-            const idEl = document.getElementById('selectedIdDisplay');
-
-            nameEl.textContent = college.name.toUpperCase();
-            collegeEl.textContent = college.name.toUpperCase();
-            studentEl.innerHTML = `<i class="fas fa-user-graduate mr-2"></i> ${student.toUpperCase()}`;
-            idEl.textContent = '# ' + college.id;
-
-            card.style.animation = 'none';
-            void card.offsetWidth;
-            card.style.animation = 'selectionPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-
-            overlay.classList.add('active');
-        }
-
-        function closeOverlay() {
-            document.getElementById('selectionOverlay').classList.remove('active');
-        }
-
-        // ================================================================
-        //  HISTORY
-        // ================================================================
-        function updateHistory(college, student) {
-            const list = document.getElementById('historyList');
-            const empty = document.getElementById('historyEmpty');
-            if (empty) empty.style.display = 'none';
-
-            const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            const div = document.createElement('div');
-            div.className = 'history-item';
-            div.style.opacity = '0';
-            div.style.transform = 'translateY(12px)';
-
-            div.innerHTML = `
-                        <div class="flex items-center gap-3 min-w-0">
-                            <span class="h-name">${college.name.toUpperCase()}</span>
-                            <span class="h-college">${student.toUpperCase()}</span>
-                        </div>
-                        <div class="flex items-center gap-3 flex-shrink-0">
-                            <span class="text-xs text-blue-300/30">${time}</span>
-                            <span class="h-number">${selected.length}</span>
-                        </div>
-                    `;
-
-            list.prepend(div);
-            gsap.to(div, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-
-            document.getElementById('historyCountBadge').textContent = selected.length;
-        }
-
-        // ================================================================
-        //  REMAINING
-        // ================================================================
-        function updateRemaining() {
-            const el = document.getElementById('remainingCount');
-            const badge = document.getElementById('remainingBadge');
-
-            if (available.length === 0) {
-                el.textContent = '0';
-                badge.innerHTML = `
-                            <i class="fas fa-check-circle mr-2 text-green-400"></i>
-                            <span style="color:#f7e05e;font-weight:600;">All colleges selected!</span>
-                        `;
-            } else {
-                el.textContent = available.length;
-                badge.innerHTML = `
-                            <i class="fas fa-university mr-2"></i>
-                            <strong id="remainingCount">${available.length}</strong> colleges remaining
-                        `;
-            }
-        }
-
-        // ================================================================
-        //  RESET
-        // ================================================================
-        function resetAll() {
-            if (isSpinning) return;
-
-            available = COLLEGE_DATA.map(c => ({ ...c }));
-            selected = [];
-            currentSelectionId = null;
-            spinAngle = 0;
-
-            closeOverlay();
-
-            const list = document.getElementById('historyList');
-            const items = list.querySelectorAll('.history-item');
-            gsap.to(items, {
-                opacity: 0,
-                y: -10,
-                stagger: 0.03,
-                duration: 0.2,
-                onComplete: () => {
-                    list.innerHTML = `
-                                <div class="history-empty" id="historyEmpty">
-                                    <i class="fas fa-inbox text-2xl block mb-2 opacity-20"></i>
-                                    No selections yet
-                                </div>
-                            `;
-                }
-            });
-
-            document.getElementById('historyCountBadge').textContent = '0';
-            document.getElementById('spinBtn').disabled = false;
-            updateRemaining();
-
-            gsap.to('.wheel-base', {
-                rotation: 360,
-                duration: 1.2,
-                ease: "elastic.out(1, 0.5)",
-                onComplete: () => {
-                    drawWheel();
-                }
-            });
-        }
-
-        // ================================================================
-        //  SOUNDS
-        // ================================================================
-        function playSpinSound() {
-            try {
-                const actx = new(window.AudioContext || window.webkitAudioContext)();
-                const osc = actx.createOscillator();
-                const gain = actx.createGain();
-                osc.connect(gain);
-                gain.connect(actx.destination);
-                osc.frequency.setValueAtTime(280, actx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(720, actx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.05, actx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.35);
-                osc.start(actx.currentTime);
-                osc.stop(actx.currentTime + 0.35);
-            } catch (_) {}
-        }
-
-        function playWinSound() {
-            try {
-                const actx = new(window.AudioContext || window.webkitAudioContext)();
-                const freqs = [523, 659, 784, 1047];
-                freqs.forEach((f, i) => {
-                    const osc = actx.createOscillator();
-                    const gain = actx.createGain();
-                    osc.connect(gain);
-                    gain.connect(actx.destination);
-                    osc.frequency.setValueAtTime(f, actx.currentTime + i * 0.1);
-                    gain.gain.setValueAtTime(0.04, actx.currentTime + i * 0.1);
-                    gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + i * 0.1 + 0.2);
-                    osc.start(actx.currentTime + i * 0.1);
-                    osc.stop(actx.currentTime + i * 0.1 + 0.2);
-                });
-            } catch (_) {}
-        }
-
-        // ================================================================
-        //  CONFETTI
-        // ================================================================
-        function triggerConfetti() {
-            confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => {
-                confetti({ particleCount: 30, angle: 60, spread: 55, origin: { x: 0.1, y: 0.5 } });
-            }, 150);
-            setTimeout(() => {
-                confetti({ particleCount: 30, angle: 120, spread: 55, origin: { x: 0.9, y: 0.5 } });
-            }, 280);
-        }
-
-        // ================================================================
-        //  PARTICLES
-        // ================================================================
-        function initParticles() {
-            const container = document.getElementById('particleBg');
-            for (let i = 0; i < 40; i++) {
-                const span = document.createElement('span');
-                const size = 1 + Math.random() * 2.5;
-                span.style.width = size + 'px';
-                span.style.height = size + 'px';
-                span.style.left = Math.random() * 100 + '%';
-                span.style.animationDuration = 14 + Math.random() * 22 + 's';
-                span.style.animationDelay = Math.random() * 16 + 's';
-                span.style.opacity = 0.08 + Math.random() * 0.2;
-                container.appendChild(span);
-            }
-        }
-        initParticles();
-
-        // ================================================================
-        //  EVENT LISTENERS
-        // ================================================================
-        document.getElementById('spinBtn').addEventListener('click', spin);
-        document.getElementById('resetBtn').addEventListener('click', resetAll);
-        document.getElementById('closeSelectionBtn').addEventListener('click', closeOverlay);
-
-        document.getElementById('selectionOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeOverlay();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeOverlay();
-        });
-
-        // ================================================================
-        //  INIT
-        // ================================================================
-        drawWheel();
-        updateRemaining();
-
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => drawWheel(), 120);
-        });
-
-        gsap.to('.wheel-base', {
-            boxShadow: '0 0 70px rgba(247,224,94,0.04), inset 0 0 60px rgba(8,11,23,0.6)',
-            duration: 2,
-            yoyo: true,
-            repeat: 1,
-            ease: "sine.inOut"
-        });
-    </script>
+    // expose restart (for any reason)
+    window.resetWheel = initWheel;
+  })();
+</script>
 </body>
 </html>
