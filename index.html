@@ -1,1145 +1,1206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AL-HUDĀ HOLY QUR'AN AWARD ‘26</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js">
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;600;700;800&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AL-HUDĀ HOLY QUR'AN AWARD ‘26</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #080b17;
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-        .bg-radial {
-            background: radial-gradient(ellipse at 50% 0%, #121c3a 0%, #080b17 75%);
-            min-height: 100vh;
-        }
+    :root {
+      --bg-1: #07101c;
+      --bg-2: #0d1628;
+      --bg-3: #14213a;
+      --gold-1: #f7e05e;
+      --gold-2: #f9b042;
+      --blue-1: #8ab4f8;
+      --blue-2: #5da8ff;
+      --text-soft: #bfd0eb;
+      --panel: rgba(255,255,255,0.045);
+      --panel-border: rgba(255,255,255,0.08);
+    }
 
-        /* ===== MAIN TITLE ===== */
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2rem, 6vw, 4.6rem);
-            letter-spacing: 0.06em;
-            background: linear-gradient(135deg, #f7e05e, #f9b042, #f7e05e);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 5s ease-in-out infinite;
-            text-shadow: 0 0 80px rgba(247, 224, 94, 0.10);
-        }
-        @keyframes shimmer {
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .sub-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            color: #8ab4f8;
-            font-size: clamp(0.75rem, 1.8vw, 1.1rem);
-            text-transform: uppercase;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(37, 72, 132, 0.28), transparent 34%),
+        radial-gradient(circle at 10% 20%, rgba(247, 224, 94, 0.08), transparent 24%),
+        radial-gradient(circle at 90% 10%, rgba(93, 168, 255, 0.08), transparent 24%),
+        linear-gradient(180deg, #08111e 0%, #0b1322 45%, #08101b 100%);
+    }
 
-        .venue-tag {
-            background: rgba(138, 180, 248, 0.07);
-            border: 1px solid rgba(138, 180, 248, 0.10);
-            padding: 0.3rem 1.4rem;
-            border-radius: 40px;
-            font-size: clamp(0.65rem, 1vw, 0.8rem);
-            color: #8ab4f8;
-            letter-spacing: 0.08em;
-            backdrop-filter: blur(4px);
-        }
+    .page-wrap {
+      position: relative;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+      z-index: 2;
+    }
 
-        /* ===== WHEEL ===== */
-        .wheel-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 460px;
-            margin: 0 auto;
-        }
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        /* pointer */
-        .wheel-pointer-outer {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .wheel-pointer {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(180deg, #f7e05e, #e8942a);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            filter: drop-shadow(0 4px 20px rgba(247, 224, 94, 0.5));
-        }
-        .wheel-pointer-dot {
-            width: 18px;
-            height: 18px;
-            background: radial-gradient(circle, #fff, #d4d4d4);
-            border-radius: 50%;
-            margin-top: -6px;
-            box-shadow: 0 0 30px rgba(247, 224, 94, 0.4);
-            border: 2px solid rgba(247, 224, 94, 0.2);
-        }
+    .bg-particles span {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(247, 224, 94, 0.18);
+      box-shadow: 0 0 12px rgba(247, 224, 94, 0.2);
+      animation: floatUp linear infinite;
+    }
 
-        .wheel-base {
-            border-radius: 50%;
-            box-shadow:
-                0 0 50px rgba(138, 180, 248, 0.08),
-                inset 0 0 80px rgba(8, 11, 23, 0.6);
-            transition: transform 5.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            aspect-ratio: 1/1;
-            border: 2px solid rgba(247, 224, 94, 0.06);
-        }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) scale(0.7);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-15vh) scale(1.2);
+        opacity: 0;
+      }
+    }
 
-        .wheel-glow-ring {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid rgba(247, 224, 94, 0.04);
-            pointer-events: none;
-            z-index: 4;
-            animation: ringPulse 4s ease-in-out infinite;
-        }
-        @keyframes ringPulse {
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.02);
-            }
-        }
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.1rem, 7vw, 4.8rem);
+      line-height: 1;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #fff2a8, #f7e05e, #f9b042, #fff2a8);
+      background-size: 220% 220%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4.5s ease-in-out infinite;
+      text-shadow: 0 0 40px rgba(247, 224, 94, 0.08);
+    }
 
-        /* ===== BUTTONS ===== */
-        .btn-spin {
-            background: linear-gradient(135deg, #f7e05e, #f9b042);
-            color: #0b0e1a;
-            font-weight: 800;
-            padding: 0.85rem 3rem;
-            border-radius: 60px;
-            border: none;
-            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-            letter-spacing: 0.06em;
-            box-shadow: 0 6px 35px rgba(247, 224, 94, 0.20);
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-spin::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-            pointer-events: none;
-            border-radius: 60px;
-        }
-        .btn-spin:hover:not(:disabled) {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 50px rgba(247, 224, 94, 0.35);
-        }
-        .btn-spin:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none;
-        }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
 
-        .btn-reset {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: #b0c8e8;
-            font-weight: 600;
-            padding: 0.85rem 2.4rem;
-            border-radius: 60px;
-            font-size: clamp(0.8rem, 1.1vw, 0.95rem);
-            letter-spacing: 0.04em;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            backdrop-filter: blur(4px);
-        }
-        .btn-reset:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
+    .sub-title {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--blue-1);
+      font-size: clamp(0.82rem, 2.2vw, 1.1rem);
+      margin-top: 8px;
+    }
 
-        .remaining-badge {
-            background: rgba(138, 180, 248, 0.05);
-            border: 1px solid rgba(138, 180, 248, 0.06);
-            padding: 0.4rem 2rem;
-            border-radius: 40px;
-            font-size: clamp(0.75rem, 1vw, 0.9rem);
-            color: #b0c8e8;
-            font-weight: 400;
-            letter-spacing: 0.03em;
-            backdrop-filter: blur(4px);
-        }
-        .remaining-badge strong {
-            color: #f7e05e;
-            font-weight: 700;
-        }
+    .tag {
+      background: rgba(138, 180, 248, 0.08);
+      border: 1px solid rgba(138, 180, 248, 0.15);
+      color: var(--text-soft);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      backdrop-filter: blur(8px);
+    }
 
-        /* ===== HISTORY PANEL ===== */
-        .history-panel {
-            background: rgba(255, 255, 255, 0.015);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 1.6rem 1.8rem;
-            height: 100%;
-            min-height: 300px;
-            transition: all 0.3s ease;
-        }
-        .history-panel:hover {
-            border-color: rgba(255, 255, 255, 0.05);
-        }
+    .glass-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 10px 40px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+      border-radius: 26px;
+      backdrop-filter: blur(14px);
+    }
 
-        .history-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 1.3vw, 1.15rem);
-            color: #e8f0ff;
-            letter-spacing: 0.04em;
-        }
-        .history-title span {
-            background: rgba(247, 224, 94, 0.08);
-            padding: 0.05rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            color: #f7e05e;
-            font-weight: 700;
-            margin-left: 0.5rem;
-        }
+    .wheel-area {
+      padding: 20px 20px 26px;
+      position: relative;
+    }
 
-        .history-list {
-            max-height: 280px;
-            overflow-y: auto;
-            padding-right: 0.25rem;
-            margin-top: 0.5rem;
-        }
-        .history-list::-webkit-scrollbar {
-            width: 3px;
-        }
-        .history-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: 10px;
-        }
-        .history-list::-webkit-scrollbar-thumb {
-            background: rgba(247, 224, 94, 0.15);
-            border-radius: 10px;
-        }
+    .wheel-shell {
+      position: relative;
+      width: min(88vw, 520px);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+    }
 
-        .history-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 0.7rem 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            margin-bottom: 0.5rem;
-        }
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.035);
-            border-color: rgba(247, 224, 94, 0.06);
-        }
-        .history-item .h-name {
-            font-weight: 700;
-            font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-            color: #e8f0ff;
-            letter-spacing: 0.02em;
-        }
-        .history-item .h-college {
-            font-size: clamp(0.55rem, 0.7vw, 0.65rem);
-            color: #8ab4f8;
-            letter-spacing: 0.04em;
-            background: rgba(138, 180, 248, 0.05);
-            padding: 0.1rem 0.8rem;
-            border-radius: 30px;
-            font-weight: 500;
-        }
-        .history-item .h-number {
-            font-weight: 700;
-            font-size: 0.7rem;
-            color: #f7e05e;
-            background: rgba(247, 224, 94, 0.06);
-            width: 26px;
-            height: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+    .wheel-aura {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(247,224,94,0.10) 0%, rgba(247,224,94,0.02) 45%, transparent 72%);
+      filter: blur(10px);
+      animation: auraPulse 3s ease-in-out infinite;
+    }
 
-        .history-empty {
-            color: #3a4a6a;
-            font-size: 0.85rem;
-            text-align: center;
-            padding: 2.5rem 0;
-            letter-spacing: 0.04em;
-        }
+    @keyframes auraPulse {
+      0%, 100% { transform: scale(0.98); opacity: 0.9; }
+      50% { transform: scale(1.03); opacity: 1; }
+    }
 
-        /* ===== SELECTION OVERLAY ===== */
-        .selection-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(8, 11, 23, 0.92);
-            backdrop-filter: blur(24px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
-        }
-        .selection-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+    .pointer-wrap {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      pointer-events: none;
+    }
 
-        .selection-overlay .close-btn {
-            position: absolute;
-            top: 2rem;
-            right: 2.5rem;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: #8a9bb8;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .selection-overlay .close-btn:hover {
-            background: rgba(255, 255, 255, 0.07);
-            color: #fff;
-            transform: rotate(90deg);
-        }
+    .pointer-cap {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 35% 35%, #fffef3, #f7e05e 50%, #d6922d 100%);
+      box-shadow:
+        0 0 30px rgba(247, 224, 94, 0.45),
+        0 0 0 6px rgba(247, 224, 94, 0.08);
+      z-index: 2;
+    }
 
-        .selection-card {
-            text-align: center;
-            padding: 2.5rem 3.5rem;
-            max-width: 780px;
-            width: 90%;
-            animation: selectionPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            transform: scale(0.8) translateY(30px);
-            opacity: 0;
-        }
-        .selection-card.active {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        @keyframes selectionPop {
-            0% {
-                transform: scale(0.8) translateY(30px);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-        }
+    .pointer {
+      width: 58px;
+      height: 66px;
+      margin-top: -5px;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+      background: linear-gradient(180deg, #fff1a4 0%, #f7e05e 35%, #f9b042 100%);
+      filter: drop-shadow(0 8px 18px rgba(247, 224, 94, 0.45));
+      transform-origin: top center;
+    }
 
-        .selection-card .badge-icon {
-            display: inline-block;
-            background: linear-gradient(135deg, #f7e05e, #f9b042);
-            color: #0b0e1a;
-            font-weight: 800;
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            padding: 0.25rem 1.4rem;
-            border-radius: 40px;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-        }
-        .selection-card .selected-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2.8rem, 10vw, 5.5rem);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 0.3rem;
-            text-shadow: 0 4px 60px rgba(247, 224, 94, 0.06);
-        }
-        .selection-card .selected-college {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #f7e05e;
-            background: rgba(247, 224, 94, 0.05);
-            display: inline-block;
-            padding: 0.25rem 2rem;
-            border-radius: 60px;
-            border: 1px solid rgba(247, 224, 94, 0.06);
-            margin-top: 0.2rem;
-        }
-        .selection-card .selected-id {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: clamp(0.7rem, 1vw, 0.9rem);
-            color: #6a7a9a;
-            margin-top: 0.8rem;
-            letter-spacing: 0.1em;
-        }
-        .selection-card .divider-line {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(247, 224, 94, 0.15), transparent);
-            margin: 1rem auto 0;
-        }
-        .selection-card .student-tag {
-            display: inline-block;
-            background: rgba(138, 180, 248, 0.06);
-            border: 1px solid rgba(138, 180, 248, 0.08);
-            padding: 0.2rem 1.4rem;
-            border-radius: 40px;
-            font-size: clamp(0.7rem, 1vw, 0.85rem);
-            color: #8ab4f8;
-            letter-spacing: 0.06em;
-            margin-top: 0.6rem;
-        }
+    .pointer.ticking {
+      animation: pointerTick 0.12s linear infinite;
+    }
 
-        @media (max-width: 640px) {
-            .selection-overlay .close-btn {
-                top: 1.2rem;
-                right: 1.2rem;
-                width: 44px;
-                height: 44px;
-                font-size: 1rem;
-            }
-            .selection-card {
-                padding: 1.5rem;
-            }
-        }
+    @keyframes pointerTick {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-7deg); }
+    }
 
-        /* ===== PARTICLES ===== */
-        .particle-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .particle-bg span {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(247, 224, 94, 0.10);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
+    .wheel-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 14px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,0.08), transparent 35%),
+        linear-gradient(145deg, rgba(247,224,94,0.20), rgba(93,168,255,0.12));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.06),
+        0 16px 50px rgba(0,0,0,0.38),
+        0 0 40px rgba(247,224,94,0.10);
+    }
 
-        /* ===== WHEEL TEXT ===== */
-        .wheel-text {
-            font-size: 8px !important;
-            letter-spacing: 0.04em;
-            font-weight: 700;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-        }
+    .wheel-rotator {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      transition: transform 5.2s cubic-bezier(0.08, 0.86, 0.14, 1);
+      will-change: transform;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 0 8px rgba(255,255,255,0.02),
+        inset 0 0 60px rgba(0,0,0,0.25);
+    }
 
-        /* glow pulse for wheel */
-        .glow-pulse {
-            animation: wheelGlow 3s ease-in-out infinite;
-        }
-        @keyframes wheelGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 40px rgba(138, 180, 248, 0.04), inset 0 0 60px rgba(8, 11, 23, 0.6);
-            }
-            50% {
-                box-shadow: 0 0 70px rgba(247, 224, 94, 0.04), inset 0 0 60px rgba(8, 11, 23, 0.6);
-            }
-        }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
 
-        /* spin pulse for button */
-        .spin-pulse {
-            animation: btnPulse 2s ease-in-out infinite;
-        }
-        @keyframes btnPulse {
-            0%,
-            100% {
-                box-shadow: 0 6px 35px rgba(247, 224, 94, 0.15);
-            }
-            50% {
-                box-shadow: 0 6px 55px rgba(247, 224, 94, 0.30);
-            }
-        }
+    .center-cap {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 35%, #fffbe0 0%, #f7e05e 28%, #c98d2d 70%, #7a531c 100%);
+      box-shadow:
+        0 0 0 10px rgba(255,255,255,0.05),
+        0 0 0 18px rgba(247,224,94,0.08),
+        0 10px 30px rgba(0,0,0,0.35);
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 900;
+      color: #0a1322;
+      line-height: 1.05;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px;
+    }
 
-        /* blink for pointer */
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.2;
-            }
-        }
-    </style>
+    .wheel-center-ring {
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #fff1a4 0%, #f7e05e 45%, #f9b042 100%);
+      color: #08111e;
+      box-shadow: 0 14px 28px rgba(247, 224, 94, 0.22);
+      transition: 0.25s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 18px 36px rgba(247, 224, 94, 0.30);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #d6e3f8;
+      background: rgba(255,255,255,0.045);
+      transition: 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .status-badge {
+      margin-top: 18px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: rgba(138, 180, 248, 0.07);
+      border: 1px solid rgba(138, 180, 248, 0.12);
+      color: #d8e6ff;
+      font-size: 0.96rem;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    .status-badge strong {
+      color: var(--gold-1);
+      font-weight: 800;
+    }
+
+    .history-panel {
+      padding: 22px;
+      min-height: 100%;
+    }
+
+    .history-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: #eef5ff;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .count-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(247, 224, 94, 0.10);
+      color: var(--gold-1);
+      font-weight: 800;
+      font-size: 0.86rem;
+      border: 1px solid rgba(247, 224, 94, 0.14);
+    }
+
+    .history-list {
+      margin-top: 18px;
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .history-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb {
+      background: rgba(247,224,94,0.18);
+      border-radius: 999px;
+    }
+
+    .history-empty {
+      padding: 48px 12px;
+      text-align: center;
+      color: #6a7a96;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: 0.25s ease;
+    }
+
+    .history-item:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(247,224,94,0.10);
+    }
+
+    .history-name {
+      font-weight: 800;
+      color: #f5f8ff;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .history-meta {
+      font-size: 0.78rem;
+      color: #8ab4f8;
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .history-order {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(247,224,94,0.08);
+      border: 1px solid rgba(247,224,94,0.12);
+      color: var(--gold-1);
+      font-size: 0.82rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(6, 10, 18, 0.90);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .result-card {
+      width: min(920px, 96vw);
+      border-radius: 30px;
+      padding: 34px 28px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(247,224,94,0.12), rgba(255,255,255,0.04) 36%, rgba(255,255,255,0.03) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 20px 80px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      transform: scale(0.90) translateY(16px);
+      opacity: 0;
+      transition: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .overlay.active .result-card {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, #fff1a4 0%, #f7e05e 45%, #f9b042 100%);
+      color: #08111e;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 24px rgba(247,224,94,0.2);
+    }
+
+    .result-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 8vw, 5.1rem);
+      line-height: 1.08;
+      font-weight: 900;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 40px rgba(247,224,94,0.08);
+    }
+
+    .result-sub {
+      margin-top: 18px;
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(247,224,94,0.08);
+      border: 1px solid rgba(247,224,94,0.12);
+      color: var(--gold-1);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .result-note {
+      margin-top: 14px;
+      color: #92a8c8;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .close-overlay {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      color: #d5e3f8;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      transition: 0.25s ease;
+    }
+
+    .close-overlay:hover {
+      transform: rotate(90deg);
+      background: rgba(255,255,255,0.09);
+      color: white;
+    }
+
+    .done-state {
+      text-align: center;
+      color: #a8c2e8;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 1024px) {
+      .history-panel {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-wrap {
+        padding-top: 18px;
+      }
+
+      .wheel-area,
+      .history-panel {
+        padding: 18px;
+      }
+
+      .pointer {
+        width: 50px;
+        height: 58px;
+      }
+
+      .pointer-cap {
+        width: 24px;
+        height: 24px;
+      }
+
+      .center-cap {
+        width: 74px;
+        height: 74px;
+        font-size: 0.62rem;
+      }
+
+      .close-overlay {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="bg-particles" id="bgParticles"></div>
 
-    <!-- ===== PARTICLES ===== -->
-    <div class="particle-bg" id="particleBg"></div>
+  <div class="overlay" id="resultOverlay">
+    <button class="close-overlay" id="closeOverlayBtn" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
 
-    <!-- ===== SELECTION OVERLAY ===== -->
-    <div class="selection-overlay" id="selectionOverlay">
-        <button class="close-btn" id="closeSelectionBtn" aria-label="Close">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="selection-card" id="selectionCard">
-            <div class="badge-icon"><i class="fas fa-trophy mr-2"></i> winner</div>
-            <div class="selected-name" id="selectedNameDisplay">—</div>
-            <div class="selected-college" id="selectedCollegeDisplay">—</div>
-            <div class="student-tag" id="selectedStudentDisplay"><i class="fas fa-user-graduate mr-2"></i> —</div>
-            <div class="selected-id" id="selectedIdDisplay"># —</div>
-            <div class="divider-line"></div>
-        </div>
+    <div class="result-card">
+      <div class="result-badge">
+        <i class="fas fa-star"></i>
+        Selected
+      </div>
+
+      <div class="result-title" id="resultCollege">—</div>
+      <div class="result-sub">College Selected</div>
+      <div class="result-note" id="resultOrder">Selection #1</div>
     </div>
+  </div>
 
-    <!-- ===== MAIN ===== -->
-    <div class="bg-radial relative z-10 p-4 md:p-6">
+  <div class="page-wrap">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <header class="text-center py-3 md:py-6">
+        <h1 class="main-title">AL-HUDĀ</h1>
+        <div class="sub-title">Holy Qur'an Award • ‘26</div>
 
-        <div class="max-w-6xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-3 mt-5">
+          <div class="tag"><i class="fas fa-map-marker-alt mr-2"></i>Venue: Thootha</div>
+          <div class="tag"><i class="fas fa-university mr-2"></i>6 Colleges</div>
+          <div class="tag"><i class="fas fa-bullseye mr-2"></i>Exact Center Stop</div>
+        </div>
+      </header>
 
-            <!-- HEADER -->
-            <header class="text-center py-4 md:py-6">
-                <h1 class="main-title">AL-HUDĀ</h1>
-                <p class="sub-title mt-1">Holy Qur'an Award <span class="text-white font-light mx-1">•</span> ‘26</p>
-                <div class="flex flex-wrap items-center justify-center gap-3 mt-3">
-                    <span class="venue-tag"><i class="fas fa-map-pin mr-2"></i> VENUE: THOOTHA</span>
-                    <span class="venue-tag"><i class="fas fa-university mr-2"></i> 6 Colleges</span>
-                    <span class="venue-tag"><i class="fas fa-users mr-2"></i> 18 Participants</span>
-                </div>
-            </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 mt-6">
+        <!-- LEFT -->
+        <div class="glass-panel wheel-area">
+          <div class="wheel-shell">
+            <div class="wheel-aura"></div>
 
-            <!-- GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-4">
-
-                <!-- LEFT: WHEEL -->
-                <div class="flex flex-col items-center">
-
-                    <div class="wheel-wrapper">
-                        <!-- pointer -->
-                        <div class="wheel-pointer-outer">
-                            <div class="wheel-pointer"></div>
-                            <div class="wheel-pointer-dot"></div>
-                        </div>
-
-                        <div class="wheel-base glow-pulse" id="wheelBase">
-                            <canvas id="wheelCanvas" width="460" height="460" style="width:100%;height:100%;display:block;"></canvas>
-                            <div class="wheel-glow-ring"></div>
-                        </div>
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="flex flex-wrap items-center justify-center gap-4 mt-7">
-                        <button class="btn-spin spin-pulse" id="spinBtn">
-                            <i class="fas fa-sync-alt mr-2"></i> Spin
-                        </button>
-                        <button class="btn-reset" id="resetBtn">
-                            <i class="fas fa-redo-alt mr-2"></i> Reset
-                        </button>
-                    </div>
-
-                    <!-- Remaining -->
-                    <div class="remaining-badge mt-5" id="remainingBadge">
-                        <i class="fas fa-university mr-2"></i>
-                        <strong id="remainingCount">6</strong> colleges remaining
-                    </div>
-                </div>
-
-                <!-- RIGHT: HISTORY -->
-                <div class="history-panel">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="history-title">
-                            <i class="fas fa-clock-rotate-left mr-2 text-blue-300"></i>
-                            Selection History
-                            <span id="historyCountBadge">0</span>
-                        </div>
-                    </div>
-
-                    <div class="history-list" id="historyList">
-                        <div class="history-empty" id="historyEmpty">
-                            <i class="fas fa-inbox text-2xl block mb-2 opacity-20"></i>
-                            No selections yet
-                        </div>
-                    </div>
-                </div>
-
+            <div class="pointer-wrap">
+              <div class="pointer-cap"></div>
+              <div class="pointer" id="pointer"></div>
             </div>
+
+            <div class="wheel-frame">
+              <div class="wheel-rotator" id="wheelRotator">
+                <canvas id="wheelCanvas" width="700" height="700"></canvas>
+              </div>
+            </div>
+
+            <div class="wheel-center-ring"></div>
+            <div class="center-cap">AL<br>HUDĀ</div>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <button class="btn-primary" id="spinBtn">
+              <i class="fas fa-arrows-rotate mr-2"></i>Spin Wheel
+            </button>
+
+            <button class="btn-secondary" id="resetBtn">
+              <i class="fas fa-redo-alt mr-2"></i>Reset
+            </button>
+          </div>
+
+          <div class="status-badge mt-5" id="remainingBadge">
+            <i class="fas fa-layer-group mr-2"></i>
+            <strong id="remainingCount">6</strong> colleges remaining
+          </div>
         </div>
+
+        <!-- RIGHT -->
+        <div class="glass-panel history-panel">
+          <div class="flex items-center justify-between">
+            <div class="history-title">
+              <i class="fas fa-clock-rotate-left mr-2 text-blue-300"></i>
+              Selection History
+            </div>
+            <div class="count-pill" id="historyCount">0</div>
+          </div>
+
+          <div class="history-list" id="historyList">
+            <div class="history-empty" id="historyEmpty">
+              <i class="fas fa-inbox text-3xl block mb-3 opacity-25"></i>
+              No college selected yet
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // ================================================================
-        //  DATA – 6 Colleges × 3 Students = 18
-        // ================================================================
-        const COLLEGE_DATA = [{
-            id: 1,
-            name: "DUIDC THOOTHA",
-            students: ["MUHAMMED AFNAN", "ZAYD ALI", "HASHIR RAHMAN"],
-            color: "#f7e05e"
-        }, {
-            id: 2,
-            name: "BUAC MANIYOOR",
-            students: ["FAISAL K", "ABDUL RAHMAN", "HUSSAIN M"],
-            color: "#4facfe"
-        }, {
-            id: 3,
-            name: "DH CHEMMAD",
-            students: ["MUHAMMED NABEEH KT", "MUHAMMED LABEEB CK", "SALMAN AHMAD VH"],
-            color: "#a770ef"
-        }, {
-            id: 4,
-            name: "SHIC PARAPPUR",
-            students: ["MUHAMMED ZUHAIR AK", "MUHAMMED NAWAF M", "MUHAMMED YASEEN KT"],
-            color: "#00cdac"
-        }, {
-            id: 5,
-            name: "DNIC VALLAPPUZHA",
-            students: ["MUHAMMED AFSAL", "MUHAMMED ARIF", "MUHAMMED MISHAB"],
-            color: "#ff758c"
-        }, {
-            id: 6,
-            name: "DNAC KOONANCHERY",
-            students: ["KHALEEL AL RAHMAN", "MUHAMMED HASHIM", "MUHAMMED AMEEN PM"],
-            color: "#f9b042"
-        }];
+  <script>
+    // =========================================================
+    // DATA - ONLY 6 COLLEGES
+    // =========================================================
+    const INITIAL_COLLEGES = [
+      { name: "DUIDC THOOTHA", code: "01" },
+      { name: "BUAC MANIYOOR", code: "02" },
+      { name: "DH CHEMMAD", code: "03" },
+      { name: "SHIC PARAPPUR", code: "04" },
+      { name: "DNIC VALLAPPUZHA", code: "05" },
+      { name: "DNAC KOONANCHERY", code: "06" }
+    ];
 
-        // ================================================================
-        //  STATE
-        // ================================================================
-        let available = COLLEGE_DATA.map(c => ({ ...c }));
-        let selected = [];
-        let isSpinning = false;
-        let spinAngle = 0;
-        let currentSelectionId = null;
+    // =========================================================
+    // STATE
+    // =========================================================
+    let availableColleges = [...INITIAL_COLLEGES];
+    let selectedColleges = [];
+    let isSpinning = false;
+    let currentRotation = 0;
 
-        // Pre-compute colors for slices (6 distinct)
-        const SLICE_COLORS = [
-            { main: "#f7e05e", alt: "#f9b042" },
-            { main: "#4facfe", alt: "#00d4ff" },
-            { main: "#a770ef", alt: "#cf8bf3" },
-            { main: "#00cdac", alt: "#02aab0" },
-            { main: "#ff758c", alt: "#ff7eb3" },
-            { main: "#f9b042", alt: "#f7e05e" }
-        ];
+    const wheelCanvas = document.getElementById('wheelCanvas');
+    const ctx = wheelCanvas.getContext('2d');
+    const wheelRotator = document.getElementById('wheelRotator');
+    const pointer = document.getElementById('pointer');
 
-        // ================================================================
-        //  CANVAS SETUP
-        // ================================================================
-        const canvas = document.getElementById('wheelCanvas');
-        const ctx = canvas.getContext('2d');
+    const spinBtn = document.getElementById('spinBtn');
+    const resetBtn = document.getElementById('resetBtn');
 
-        function getCanvasSize() {
-            const rect = canvas.getBoundingClientRect();
-            const size = rect.width || 460;
-            return { w: size, h: size };
-        }
+    const remainingBadge = document.getElementById('remainingBadge');
+    const remainingCount = document.getElementById('remainingCount');
 
-        function drawWheel() {
-            const { w, h } = getCanvasSize();
-            canvas.width = w;
-            canvas.height = h;
-            const cx = w / 2,
-                cy = h / 2,
-                radius = w / 2 - 3;
+    const historyList = document.getElementById('historyList');
+    const historyEmpty = document.getElementById('historyEmpty');
+    const historyCount = document.getElementById('historyCount');
 
-            ctx.clearRect(0, 0, w, h);
+    const resultOverlay = document.getElementById('resultOverlay');
+    const closeOverlayBtn = document.getElementById('closeOverlayBtn');
+    const resultCollege = document.getElementById('resultCollege');
+    const resultOrder = document.getElementById('resultOrder');
 
-            // ----- NO COLLEGES LEFT -----
-            if (available.length === 0) {
-                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-                grad.addColorStop(0, 'rgba(247,224,94,0.05)');
-                grad.addColorStop(1, 'rgba(8,11,23,0.6)');
-                ctx.beginPath();
-                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-                ctx.fillStyle = grad;
-                ctx.fill();
+    const SLICE_COLORS = [
+      ["#F7E05E", "#F9B042"],
+      ["#5DA8FF", "#327AFF"],
+      ["#9F73FF", "#C28BFF"],
+      ["#00D1B2", "#02AAB0"],
+      ["#FF7B9D", "#FF9D73"],
+      ["#6DD5FA", "#2980B9"]
+    ];
 
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = '#f7e05e';
-                ctx.font = `bold ${radius * 0.18}px 'Playfair Display', serif`;
-                ctx.fillText('🏆', cx, cy - 14);
-                ctx.fillStyle = '#f7e05e';
-                ctx.font = `bold ${radius * 0.12}px 'Inter', sans-serif`;
-                ctx.fillText('ALL DONE!', cx, cy + 30);
-                ctx.fillStyle = '#4a5a7a';
-                ctx.font = `${radius * 0.07}px 'Inter', sans-serif`;
-                ctx.fillText('Click RESET to start over', cx, cy + 58);
+    // =========================================================
+    // BACKGROUND PARTICLES
+    // =========================================================
+    function initParticles() {
+      const bg = document.getElementById('bgParticles');
+      bg.innerHTML = "";
+      for (let i = 0; i < 55; i++) {
+        const s = document.createElement('span');
+        const size = (Math.random() * 3 + 1).toFixed(2);
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.left = (Math.random() * 100) + '%';
+        s.style.animationDuration = (12 + Math.random() * 18).toFixed(2) + 's';
+        s.style.animationDelay = (Math.random() * 14).toFixed(2) + 's';
+        s.style.opacity = (0.12 + Math.random() * 0.22).toFixed(2);
+        bg.appendChild(s);
+      }
+    }
+    initParticles();
 
-                ctx.beginPath();
-                ctx.arc(cx, cy, radius * 0.75, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(247,224,94,0.05)';
-                ctx.lineWidth = 1.5;
-                ctx.setLineDash([6, 12]);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                return;
-            }
+    // =========================================================
+    // HELPERS
+    // =========================================================
+    function getCanvasSize() {
+      const box = wheelRotator.getBoundingClientRect();
+      const size = Math.max(300, Math.floor(box.width || 520));
+      return size;
+    }
 
-            const slice = (2 * Math.PI) / available.length;
-            const fontSize = Math.min(radius * 0.038, 10);
-            const textRadius = radius * 0.82;
+    function splitLabel(label) {
+      const words = label.split(' ');
+      if (words.length <= 2) return words;
+      if (words.length === 3) return [words[0], words.slice(1).join(' ')];
+      return [
+        words.slice(0, 2).join(' '),
+        words.slice(2).join(' ')
+      ];
+    }
 
-            // ----- DRAW SLICES -----
-            for (let i = 0; i < available.length; i++) {
-                const start = spinAngle + i * slice;
-                const end = start + slice;
-                const ci = i % SLICE_COLORS.length;
-                const c = SLICE_COLORS[ci];
+    function formatTime() {
+      return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
 
-                // slice fill
-                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-                grad.addColorStop(0, c.alt);
-                grad.addColorStop(1, c.main);
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, radius, start, end);
-                ctx.closePath();
-                ctx.fillStyle = grad;
-                ctx.fill();
+    function playSpinSound() {
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
 
-                // border
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, radius, start, end);
-                ctx.closePath();
-                ctx.strokeStyle = 'rgba(8,11,23,0.35)';
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+        osc.type = 'triangle';
+        osc.connect(gain);
+        gain.connect(actx.destination);
 
-                // divider line
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.lineTo(cx + Math.cos(start) * radius, cy + Math.sin(start) * radius);
-                ctx.strokeStyle = 'rgba(8,11,23,0.25)';
-                ctx.lineWidth = 1.2;
-                ctx.stroke();
+        osc.frequency.setValueAtTime(180, actx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(680, actx.currentTime + 0.28);
 
-                // ----- COLLEGE NAME on the slice (near rim) -----
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(start + slice / 2);
-                ctx.translate(textRadius, 0);
+        gain.gain.setValueAtTime(0.055, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.30);
 
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.shadowColor = 'rgba(0,0,0,0.9)';
-                ctx.shadowBlur = 6;
+        osc.start();
+        osc.stop(actx.currentTime + 0.30);
+      } catch (e) {}
+    }
 
-                const name = available[i].name;
-                // if name is long, split into two lines
-                let lines = [name];
-                if (name.length > 14) {
-                    const parts = name.split(' ');
-                    if (parts.length > 1) {
-                        const mid = Math.ceil(parts.length / 2);
-                        lines = [parts.slice(0, mid).join(' '), parts.slice(mid).join(' ')];
-                    } else {
-                        lines = [name.substring(0, Math.ceil(name.length / 2)), name.substring(Math.ceil(name.length / 2))];
-                    }
-                }
+    function playWinSound() {
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((f, i) => {
+          const osc = actx.createOscillator();
+          const gain = actx.createGain();
+          osc.type = 'sine';
+          osc.connect(gain);
+          gain.connect(actx.destination);
 
-                const lineHeight = fontSize * 1.3;
-                const totalHeight = lines.length * lineHeight;
-                const startY = -totalHeight / 2 + lineHeight / 2;
+          const start = actx.currentTime + i * 0.08;
+          osc.frequency.setValueAtTime(f, start);
 
-                ctx.font = `bold ${fontSize}px 'Montserrat', sans-serif`;
-                ctx.fillStyle = '#ffffff';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
+          gain.gain.setValueAtTime(0.045, start);
+          gain.gain.exponentialRampToValueAtTime(0.001, start + 0.18);
 
-                lines.forEach((line, idx) => {
-                    ctx.fillText(line, 0, startY + idx * lineHeight);
-                });
+          osc.start(start);
+          osc.stop(start + 0.18);
+        });
+      } catch (e) {}
+    }
 
-                ctx.shadowBlur = 0;
-                ctx.restore();
-            }
+    function fireConfetti() {
+      confetti({
+        particleCount: 90,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+      setTimeout(() => {
+        confetti({
+          particleCount: 55,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0.1, y: 0.5 }
+        });
+      }, 160);
+      setTimeout(() => {
+        confetti({
+          particleCount: 55,
+          angle: 120,
+          spread: 60,
+          origin: { x: 0.9, y: 0.5 }
+        });
+      }, 280);
+    }
 
-            // ----- outer ring -----
-            ctx.beginPath();
-            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+    // =========================================================
+    // DRAW WHEEL
+    // =========================================================
+    function drawWheel() {
+      const size = getCanvasSize();
+      wheelCanvas.width = size;
+      wheelCanvas.height = size;
 
-            // ----- inner center ring -----
-            const centerR = radius * 0.13;
-            const grad2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, centerR);
-            grad2.addColorStop(0, 'rgba(8,11,23,0.3)');
-            grad2.addColorStop(1, 'rgba(8,11,23,0.7)');
-            ctx.beginPath();
-            ctx.arc(cx, cy, centerR, 0, Math.PI * 2);
-            ctx.fillStyle = grad2;
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(247,224,94,0.08)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+      const cx = size / 2;
+      const cy = size / 2;
+      const radius = size / 2 - 10;
 
-            // small star in center
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = `${centerR * 0.9}px 'Font Awesome 6 Free'`;
-            ctx.fillStyle = 'rgba(247,224,94,0.15)';
-            ctx.fillText('', cx, cy + 1);
-        }
+      ctx.clearRect(0, 0, size, size);
 
-        // ================================================================
-        //  SPIN
-        // ================================================================
-        function spin() {
-            if (isSpinning || available.length === 0) return;
+      if (availableColleges.length === 0) {
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        grad.addColorStop(0, "rgba(247,224,94,0.14)");
+        grad.addColorStop(0.55, "rgba(255,255,255,0.04)");
+        grad.addColorStop(1, "rgba(8,17,30,0.92)");
 
-            isSpinning = true;
-            document.getElementById('spinBtn').disabled = true;
-            closeOverlay();
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
 
-            const spins = 6 + Math.random() * 6;
-            const idx = Math.floor(Math.random() * available.length);
-            const slice = (2 * Math.PI) / available.length;
-            const target = spinAngle - (2 * Math.PI * spins) - (idx * slice) - (slice / 2);
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius - 8, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(255,255,255,0.10)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
-            playSpinSound();
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
-            const pointer = document.querySelector('.wheel-pointer');
-            pointer.style.animation = 'blink 0.12s infinite';
+        ctx.fillStyle = "#f7e05e";
+        ctx.font = `900 ${Math.max(28, size * 0.06)}px Montserrat`;
+        ctx.fillText("ALL SELECTED", cx, cy - 10);
 
-            gsap.to({ a: spinAngle }, {
-                a: target,
-                duration: 5.5,
-                ease: "power2.inOut",
-                onUpdate: function() {
-                    spinAngle = this.targets()[0].a;
-                    drawWheel();
-                },
-                onComplete: function() {
-                    spinAngle = target % (2 * Math.PI);
-                    if (spinAngle > 0) spinAngle -= 2 * Math.PI;
+        ctx.fillStyle = "#9ab0d0";
+        ctx.font = `600 ${Math.max(15, size * 0.026)}px Inter`;
+        ctx.fillText("Click RESET to start again", cx, cy + 34);
+        return;
+      }
 
-                    const chosen = available[idx];
-                    // pick a random student from this college
-                    const student = chosen.students[Math.floor(Math.random() * chosen.students.length)];
+      const count = availableColleges.length;
+      const sliceAngle = (Math.PI * 2) / count;
+      const baseStart = -Math.PI / 2 - sliceAngle / 2;
 
-                    available = available.filter(c => c.id !== chosen.id);
-                    selected.push({ ...chosen, selectedStudent: student });
-                    currentSelectionId = chosen.id;
+      // outer shadow circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,0,0,0.18)";
+      ctx.fill();
 
-                    showSelection(chosen, student);
-                    updateHistory(chosen, student);
-                    updateRemaining();
-                    playWinSound();
-                    triggerConfetti();
+      // slices
+      for (let i = 0; i < count; i++) {
+        const start = baseStart + i * sliceAngle;
+        const end = start + sliceAngle;
+        const centerAngle = start + sliceAngle / 2;
+        const [c1, c2] = SLICE_COLORS[i % SLICE_COLORS.length];
 
-                    setTimeout(() => {
-                        isSpinning = false;
-                        document.getElementById('spinBtn').disabled = available.length === 0;
-                        pointer.style.animation = '';
-                    }, 700);
+        const grad = ctx.createLinearGradient(
+          cx + Math.cos(start) * radius,
+          cy + Math.sin(start) * radius,
+          cx + Math.cos(end) * radius,
+          cy + Math.sin(end) * radius
+        );
+        grad.addColorStop(0, c1);
+        grad.addColorStop(1, c2);
 
-                    drawWheel();
-                }
-            });
-        }
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, start, end);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
 
-        // ================================================================
-        //  SHOW FULL-SCREEN SELECTION
-        // ================================================================
-        function showSelection(college, student) {
-            const overlay = document.getElementById('selectionOverlay');
-            const card = document.getElementById('selectionCard');
-            const nameEl = document.getElementById('selectedNameDisplay');
-            const collegeEl = document.getElementById('selectedCollegeDisplay');
-            const studentEl = document.getElementById('selectedStudentDisplay');
-            const idEl = document.getElementById('selectedIdDisplay');
+        // glossy overlay
+        const gloss = ctx.createRadialGradient(cx, cy - radius * 0.25, 0, cx, cy, radius);
+        gloss.addColorStop(0, "rgba(255,255,255,0.14)");
+        gloss.addColorStop(0.4, "rgba(255,255,255,0.05)");
+        gloss.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, start, end);
+        ctx.closePath();
+        ctx.fillStyle = gloss;
+        ctx.fill();
 
-            nameEl.textContent = college.name.toUpperCase();
-            collegeEl.textContent = college.name.toUpperCase();
-            studentEl.innerHTML = `<i class="fas fa-user-graduate mr-2"></i> ${student.toUpperCase()}`;
-            idEl.textContent = '# ' + college.id;
+        // divider
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(start) * radius, cy + Math.sin(start) * radius);
+        ctx.strokeStyle = "rgba(10,19,34,0.34)";
+        ctx.lineWidth = Math.max(2, size * 0.005);
+        ctx.stroke();
 
-            card.style.animation = 'none';
-            void card.offsetWidth;
-            card.style.animation = 'selectionPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+        // label
+        const labelLines = splitLabel(availableColleges[i].name);
+        const labelRadius = radius * 0.64;
+        const tx = cx + Math.cos(centerAngle) * labelRadius;
+        const ty = cy + Math.sin(centerAngle) * labelRadius;
 
-            overlay.classList.add('active');
-        }
+        ctx.save();
+        ctx.translate(tx, ty);
 
-        function closeOverlay() {
-            document.getElementById('selectionOverlay').classList.remove('active');
-        }
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
-        // ================================================================
-        //  HISTORY
-        // ================================================================
-        function updateHistory(college, student) {
-            const list = document.getElementById('historyList');
-            const empty = document.getElementById('historyEmpty');
-            if (empty) empty.style.display = 'none';
+        // auto font sizing
+        const fontSize = Math.max(12, Math.min(22, size / (count <= 4 ? 25 : 28)));
+        const lineHeight = fontSize * 1.1;
 
-            const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        ctx.font = `900 ${fontSize}px Montserrat`;
+        ctx.fillStyle = "#ffffff";
+        ctx.strokeStyle = "rgba(0,0,0,0.38)";
+        ctx.lineWidth = 5;
+        ctx.lineJoin = "round";
 
-            const div = document.createElement('div');
-            div.className = 'history-item';
-            div.style.opacity = '0';
-            div.style.transform = 'translateY(12px)';
-
-            div.innerHTML = `
-                        <div class="flex items-center gap-3 min-w-0">
-                            <span class="h-name">${college.name.toUpperCase()}</span>
-                            <span class="h-college">${student.toUpperCase()}</span>
-                        </div>
-                        <div class="flex items-center gap-3 flex-shrink-0">
-                            <span class="text-xs text-blue-300/30">${time}</span>
-                            <span class="h-number">${selected.length}</span>
-                        </div>
-                    `;
-
-            list.prepend(div);
-            gsap.to(div, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-
-            document.getElementById('historyCountBadge').textContent = selected.length;
-        }
-
-        // ================================================================
-        //  REMAINING
-        // ================================================================
-        function updateRemaining() {
-            const el = document.getElementById('remainingCount');
-            const badge = document.getElementById('remainingBadge');
-
-            if (available.length === 0) {
-                el.textContent = '0';
-                badge.innerHTML = `
-                            <i class="fas fa-check-circle mr-2 text-green-400"></i>
-                            <span style="color:#f7e05e;font-weight:600;">All colleges selected!</span>
-                        `;
-            } else {
-                el.textContent = available.length;
-                badge.innerHTML = `
-                            <i class="fas fa-university mr-2"></i>
-                            <strong id="remainingCount">${available.length}</strong> colleges remaining
-                        `;
-            }
-        }
-
-        // ================================================================
-        //  RESET
-        // ================================================================
-        function resetAll() {
-            if (isSpinning) return;
-
-            available = COLLEGE_DATA.map(c => ({ ...c }));
-            selected = [];
-            currentSelectionId = null;
-            spinAngle = 0;
-
-            closeOverlay();
-
-            const list = document.getElementById('historyList');
-            const items = list.querySelectorAll('.history-item');
-            gsap.to(items, {
-                opacity: 0,
-                y: -10,
-                stagger: 0.03,
-                duration: 0.2,
-                onComplete: () => {
-                    list.innerHTML = `
-                                <div class="history-empty" id="historyEmpty">
-                                    <i class="fas fa-inbox text-2xl block mb-2 opacity-20"></i>
-                                    No selections yet
-                                </div>
-                            `;
-                }
-            });
-
-            document.getElementById('historyCountBadge').textContent = '0';
-            document.getElementById('spinBtn').disabled = false;
-            updateRemaining();
-
-            gsap.to('.wheel-base', {
-                rotation: 360,
-                duration: 1.2,
-                ease: "elastic.out(1, 0.5)",
-                onComplete: () => {
-                    drawWheel();
-                }
-            });
-        }
-
-        // ================================================================
-        //  SOUNDS
-        // ================================================================
-        function playSpinSound() {
-            try {
-                const actx = new(window.AudioContext || window.webkitAudioContext)();
-                const osc = actx.createOscillator();
-                const gain = actx.createGain();
-                osc.connect(gain);
-                gain.connect(actx.destination);
-                osc.frequency.setValueAtTime(280, actx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(720, actx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.05, actx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.35);
-                osc.start(actx.currentTime);
-                osc.stop(actx.currentTime + 0.35);
-            } catch (_) {}
-        }
-
-        function playWinSound() {
-            try {
-                const actx = new(window.AudioContext || window.webkitAudioContext)();
-                const freqs = [523, 659, 784, 1047];
-                freqs.forEach((f, i) => {
-                    const osc = actx.createOscillator();
-                    const gain = actx.createGain();
-                    osc.connect(gain);
-                    gain.connect(actx.destination);
-                    osc.frequency.setValueAtTime(f, actx.currentTime + i * 0.1);
-                    gain.gain.setValueAtTime(0.04, actx.currentTime + i * 0.1);
-                    gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + i * 0.1 + 0.2);
-                    osc.start(actx.currentTime + i * 0.1);
-                    osc.stop(actx.currentTime + i * 0.1 + 0.2);
-                });
-            } catch (_) {}
-        }
-
-        // ================================================================
-        //  CONFETTI
-        // ================================================================
-        function triggerConfetti() {
-            confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => {
-                confetti({ particleCount: 30, angle: 60, spread: 55, origin: { x: 0.1, y: 0.5 } });
-            }, 150);
-            setTimeout(() => {
-                confetti({ particleCount: 30, angle: 120, spread: 55, origin: { x: 0.9, y: 0.5 } });
-            }, 280);
-        }
-
-        // ================================================================
-        //  PARTICLES
-        // ================================================================
-        function initParticles() {
-            const container = document.getElementById('particleBg');
-            for (let i = 0; i < 40; i++) {
-                const span = document.createElement('span');
-                const size = 1 + Math.random() * 2.5;
-                span.style.width = size + 'px';
-                span.style.height = size + 'px';
-                span.style.left = Math.random() * 100 + '%';
-                span.style.animationDuration = 14 + Math.random() * 22 + 's';
-                span.style.animationDelay = Math.random() * 16 + 's';
-                span.style.opacity = 0.08 + Math.random() * 0.2;
-                container.appendChild(span);
-            }
-        }
-        initParticles();
-
-        // ================================================================
-        //  EVENT LISTENERS
-        // ================================================================
-        document.getElementById('spinBtn').addEventListener('click', spin);
-        document.getElementById('resetBtn').addEventListener('click', resetAll);
-        document.getElementById('closeSelectionBtn').addEventListener('click', closeOverlay);
-
-        document.getElementById('selectionOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeOverlay();
+        const totalHeight = (labelLines.length - 1) * lineHeight;
+        labelLines.forEach((line, idx) => {
+          const y = idx * lineHeight - totalHeight / 2;
+          ctx.strokeText(line, 0, y);
+          ctx.fillText(line, 0, y);
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeOverlay();
-        });
+        ctx.restore();
+      }
 
-        // ================================================================
-        //  INIT
-        // ================================================================
-        drawWheel();
+      // outer ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius - 1, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(255,255,255,0.18)";
+      ctx.lineWidth = Math.max(4, size * 0.01);
+      ctx.stroke();
+
+      // inner ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 0.23, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(8,17,30,0.22)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.06)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+
+    // =========================================================
+    // HISTORY / STATUS
+    // =========================================================
+    function updateRemaining() {
+      if (availableColleges.length === 0) {
+        remainingBadge.innerHTML = `
+          <i class="fas fa-check-circle mr-2 text-green-400"></i>
+          <span style="color:#f7e05e;font-weight:800;">All colleges selected</span>
+        `;
+      } else {
+        remainingBadge.innerHTML = `
+          <i class="fas fa-layer-group mr-2"></i>
+          <strong id="remainingCount">${availableColleges.length}</strong> colleges remaining
+        `;
+      }
+    }
+
+    function addHistory(college) {
+      if (historyEmpty) historyEmpty.style.display = 'none';
+
+      const order = selectedColleges.length;
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(10px)';
+
+      item.innerHTML = `
+        <div class="min-w-0">
+          <div class="history-name">${college.name}</div>
+          <div class="history-meta">Selected at ${formatTime()}</div>
+        </div>
+        <div class="history-order">${order}</div>
+      `;
+
+      historyList.prepend(item);
+      historyCount.textContent = order;
+
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 0.35,
+        ease: "power2.out"
+      });
+    }
+
+    // =========================================================
+    // OVERLAY
+    // =========================================================
+    function showResult(college) {
+      resultCollege.textContent = college.name;
+      resultOrder.textContent = `Selection #${selectedColleges.length}`;
+      resultOverlay.classList.add('active');
+    }
+
+    function closeResult() {
+      resultOverlay.classList.remove('active');
+    }
+
+    // =========================================================
+    // PERFECT SPIN
+    // =========================================================
+    function spinWheel() {
+      if (isSpinning || availableColleges.length === 0) return;
+
+      isSpinning = true;
+      spinBtn.disabled = true;
+      closeResult();
+
+      const count = availableColleges.length;
+      const chosenIndex = Math.floor(Math.random() * count);
+      const sliceDeg = 360 / count;
+
+      // Because slice 0 is centered at the pointer on 0deg,
+      // target normalized rotation for selected index is:
+      const targetNormalized = (360 - chosenIndex * sliceDeg) % 360;
+      const currentNormalized = ((currentRotation % 360) + 360) % 360;
+
+      let delta = targetNormalized - currentNormalized;
+      if (delta < 0) delta += 360;
+
+      const extraTurns = (6 + Math.floor(Math.random() * 3)) * 360;
+      const finalRotation = currentRotation + extraTurns + delta;
+
+      isSpinning = true;
+      pointer.classList.add('ticking');
+      playSpinSound();
+
+      wheelRotator.style.transition = 'transform 5.2s cubic-bezier(0.08, 0.86, 0.14, 1)';
+      wheelRotator.style.transform = `rotate(${finalRotation}deg)`;
+
+      const onDone = () => {
+        wheelRotator.removeEventListener('transitionend', onDone);
+        currentRotation = finalRotation;
+
+        const chosen = availableColleges.splice(chosenIndex, 1)[0];
+        selectedColleges.push(chosen);
+
+        playWinSound();
+        fireConfetti();
+        addHistory(chosen);
         updateRemaining();
+        showResult(chosen);
 
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => drawWheel(), 120);
-        });
+        // redraw wheel without selected slice and reset visible wheel to 0deg for clean next spin
+        setTimeout(() => {
+          wheelRotator.style.transition = 'none';
+          wheelRotator.style.transform = 'rotate(0deg)';
+          currentRotation = 0;
+          drawWheel();
 
-        // initial subtle animation
-        gsap.to('.wheel-base', {
-            boxShadow: '0 0 70px rgba(247,224,94,0.04), inset 0 0 60px rgba(8,11,23,0.6)',
-            duration: 2,
-            yoyo: true,
-            repeat: 1,
-            ease: "sine.inOut"
-        });
-    </script>
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              wheelRotator.style.transition = 'transform 5.2s cubic-bezier(0.08, 0.86, 0.14, 1)';
+              pointer.classList.remove('ticking');
+              isSpinning = false;
+              spinBtn.disabled = availableColleges.length === 0;
+            });
+          });
+        }, 40);
+      };
+
+      wheelRotator.addEventListener('transitionend', onDone, { once: true });
+    }
+
+    // =========================================================
+    // RESET
+    // =========================================================
+    function resetAll() {
+      if (isSpinning) return;
+
+      availableColleges = [...INITIAL_COLLEGES];
+      selectedColleges = [];
+      currentRotation = 0;
+
+      closeResult();
+
+      wheelRotator.style.transition = 'none';
+      wheelRotator.style.transform = 'rotate(0deg)';
+
+      historyList.innerHTML = `
+        <div class="history-empty" id="historyEmpty">
+          <i class="fas fa-inbox text-3xl block mb-3 opacity-25"></i>
+          No college selected yet
+        </div>
+      `;
+
+      historyCount.textContent = '0';
+      spinBtn.disabled = false;
+      updateRemaining();
+      drawWheel();
+
+      gsap.fromTo(wheelRotator,
+        { scale: 0.96, rotate: -12 },
+        {
+          scale: 1,
+          rotate: 0,
+          duration: 0.9,
+          ease: "elastic.out(1, 0.55)",
+          clearProps: "transform"
+        }
+      );
+    }
+
+    // =========================================================
+    // EVENTS
+    // =========================================================
+    spinBtn.addEventListener('click', spinWheel);
+    resetBtn.addEventListener('click', resetAll);
+    closeOverlayBtn.addEventListener('click', closeResult);
+
+    resultOverlay.addEventListener('click', (e) => {
+      if (e.target === resultOverlay) closeResult();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeResult();
+      if (e.key === ' ' && !isSpinning && availableColleges.length > 0) {
+        e.preventDefault();
+        spinWheel();
+      }
+    });
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        drawWheel();
+      }, 120);
+    });
+
+    // =========================================================
+    // INIT
+    // =========================================================
+    updateRemaining();
+    drawWheel();
+
+    gsap.from(".wheel-shell", {
+      scale: 0.92,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out"
+    });
+
+    gsap.from(".history-panel", {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.1,
+      ease: "power3.out"
+    });
+  </script>
 </body>
 </html>
